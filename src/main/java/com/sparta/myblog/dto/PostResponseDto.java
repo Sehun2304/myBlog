@@ -25,8 +25,9 @@ public class PostResponseDto {
         this.createdAt = post.getCreateAt();
         this.modifiedAt = post.getModifiedAt();
     }
-
+        //password 노출을 방지하기 위해 DTO 사용
     public PostResponseDto(Boolean success) {
         this.success = success;
     }
 }
+

@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service //빈으로 등록 + Service 클래스임을 드러내기 위해 사용
 public class PostService {
 
     private final PostRepository postRepository;
@@ -24,6 +24,8 @@ public class PostService {
     public List<PostResponseDto> getPostListV1() {
         // 방법1. 리스트 반복하며 넣어주기
         List<Post> postList = postRepository.findAllByOrderByCreateAtDesc();
+        //findAll 데이터 값을 가져온다, by 어떤 값을 가져올 것인가 Orderby 순서를 지정
+        //CreateAt 생성일시를 기준으로 조회 Desc 내림차순
         List<PostResponseDto> postResponseDtoList = new ArrayList<>();
         for (Post post : postList) {
             postResponseDtoList.add(new PostResponseDto(post));
@@ -76,8 +78,8 @@ public class PostService {
     }
 
     private Post findPost(Long id) {
-        return postRepository.findById(id).orElseThrow(() ->
-            new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+        return postRepository.findById(id).orElseThrow(() -> //값이 없을시 예외처리 던져준다
+            new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
     }
 
 }

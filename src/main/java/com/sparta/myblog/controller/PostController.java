@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class PostController {
     private final PostService postService;
-
+    // final 선언으로 변경없이 계속 사용
     public PostController(PostService postService){
         this.postService = postService;
     }
@@ -27,13 +27,13 @@ public class PostController {
     public PostResponseDto getPost(@PathVariable Long id) {
         return postService.getPost(id);
     }
-
+    //단건 조회
     @PostMapping("/posts")
     public PostResponseDto createPost(@RequestBody PostRequestDto postRequestDto){
         return postService.createPost(postRequestDto);
     }
 
-    @PutMapping("/posts/{id}")
+    @PutMapping("/posts/{id}")        //경로변수
     public PostResponseDto updatePost(@PathVariable Long id, @RequestBody PostRequestDto postRequestDto){
         return postService.updatePost(id, postRequestDto);
     }
